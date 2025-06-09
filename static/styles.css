@@ -1,61 +1,183 @@
+:root {
+  --bg: #f4f4f4;
+  --text: #333;
+  --primary: #007bff;
+  --accent: #28a745;
+  --button-hover: #0056b3;
+  --container-bg: #fff;
+  --drop-bg: #e6f0ff;
+}
+
+.dark-mode {
+  --bg: #121212;
+  --text: #f4f4f4;
+  --primary: #4dabf7;
+  --accent: #51cf66;
+  --button-hover: #1c7ed6;
+  --container-bg: #1e1e1e;
+  --drop-bg: #2c2c2c;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: #f4f4f4;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
 }
 
 .container {
-    margin: 50px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
+  max-width: 500px;
+  margin: 60px auto;
+  padding: 25px;
+  background: var(--container-bg);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
 h1 {
-    color: #333;
+  margin-bottom: 20px;
 }
 
-input, button {
-    margin: 10px;
-    padding: 10px;
-    font-size: 16px;
+#drop-area {
+  border: 2px dashed var(--primary);
+  background: var(--drop-bg);
+  padding: 20px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  transition: background 0.3s;
+}
+
+#drop-area.dragging {
+  background-color: #cce5ff;
 }
 
 .formats {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 15px 0;
 }
 
 .format-btn {
-    margin: 5px;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    background: #007BFF;
-    color: white;
-    border-radius: 5px;
+  flex: 1 1 30%;
+  padding: 10px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.format-btn.active {
+  background: var(--accent);
+}
+
+.format-btn:hover {
+  background: var(--button-hover);
+}
+
+.quality-input {
+  margin-bottom: 15px;
+}
+
+input[type="number"] {
+  padding: 8px;
+  width: 100%;
+  font-size: 16px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
 #convertBtn {
-    background: #28A745;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 12px 25px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  position: relative;
+  transition: background 0.3s;
+}
+
+#convertBtn:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+.spinner {
+  border: 4px solid #fff;
+  border-top: 4px solid var(--primary);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.hidden {
+  display: none;
 }
 
 #output {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
-/* Drag & Drop Styling */
-#drop-area {
-    border: 2px dashed #007BFF;
-    padding: 20px;
-    cursor: pointer;
+.theme-toggle {
+  position: absolute;
+  top: 15px;
+  right: 20px;
 }
 
-.dragging {
-    background-color: #D4E6FF;
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  border-radius: 30px;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px; width: 20px;
+  left: 3px; bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: var(--primary);
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
