@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Format Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Image Format Converter</h1>
+
+        <!-- Drag & Drop Upload Box -->
+        <div id="drop-area">
+            <p>Drag & Drop images here or click to upload</p>
+            <input type="file" id="imageInput" multiple accept="image/*">
+        </div>
+
+        <!-- Format Selection -->
+        <div class="formats">
+            <button class="format-btn" data-format="jpg">JPG</button>
+            <button class="format-btn" data-format="png">PNG</button>
+            <button class="format-btn" data-format="webp">WEBP</button>
+            <button class="format-btn" data-format="bmp">BMP</button>
+            <button class="format-btn" data-format="tiff">TIFF</button>
+        </div>
+
+        <!-- Compression Setting -->
+        <label for="quality">Quality (%):</label>
+        <input type="number" id="quality" value="90" min="10" max="100">
+
+        <!-- Convert Button -->
+        <button id="convertBtn">Convert</button>
+
+        <!-- Output Box -->
+        <div id="output"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
