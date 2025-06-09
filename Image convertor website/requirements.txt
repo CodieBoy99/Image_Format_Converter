@@ -1,8 +1,0 @@
-<<<<<<< HEAD
-flask
-pillow
-=======
-flask
-pillow
->>>>>>> 0f39552 (Updated requirements.txt)
-gunicorn
