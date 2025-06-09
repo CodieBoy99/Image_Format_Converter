@@ -1,17 +1,15 @@
 import os
-import zipfile  # Correctly importing zipfile
+import zipfile
 from flask import Flask, request, render_template, jsonify, send_file
 from PIL import Image
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
 
-# Folder Setup
 UPLOAD_FOLDER = "Image_Input"
 OUTPUT_FOLDER = "Image_Output"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
-# Supported image formats
 formats = {
     "jpg": "JPEG",
     "png": "PNG",
@@ -45,7 +43,6 @@ def convert_images():
         img.save(output_path, format=formats[output_format], quality=quality)
         converted_files.append(output_path)
 
-    # If multiple files, zip them
     if len(converted_files) > 1:
         zip_path = os.path.join(OUTPUT_FOLDER, "converted_images.zip")
         with zipfile.ZipFile(zip_path, "w") as zipf:
